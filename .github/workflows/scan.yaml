@@ -1,0 +1,19 @@
+on:
+  workflow_call:
+    secrets:
+      SCAN_TOKEN:
+        required: true
+      GITHUBACTIONSTOKEN:
+        required: true
+jobs:
+  semgrep:
+    name: Semgrep
+    runs-on: [ self-hosted, weave-stable ]
+    if: ${{ github.actor != 'dependabot[bot]' && (github.event_name == 'pull_request' || contains(fromJson('["refs/heads/master","ref/heads/main"]'), github.ref)) }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+      - uses: returntocorp/semgrep-action@v1
+        with:
+          publishToken: ${{ secrets.SCAN_TOKEN }}
