@@ -11,6 +11,8 @@ jobs:
     runs-on: [ self-hosted, weave-stable ]
     if: ${{ github.actor != 'dependabot[bot]' && (github.event_name == 'pull_request' || contains(fromJson('["refs/heads/master","refs/heads/main"]'), github.ref)) }}
     steps:
+      - name: Cleanup
+        uses: docker://gcr.io/weave-lab/devx/github-actions-cleanup:stable
       - uses: actions/checkout@v2
         with:
           fetch-depth: "0"
