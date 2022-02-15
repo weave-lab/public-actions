@@ -11,6 +11,20 @@ jobs:
     runs-on: [ self-hosted, weave-stable ]
     if: ${{ github.actor != 'dependabot[bot]' && (github.event_name == 'pull_request' || contains(fromJson('["refs/heads/master","refs/heads/main"]'), github.ref)) }}
     steps:
+      - name: debug
+        run: |
+          echo === PWD
+          pwd
+          echo === END
+          echo === host
+          hostname
+          echo === END
+          echo === ls -l "/data/work/lessonly-test-for-petek/lessonly-test-for-petek"
+          find "/data/work/lessonly-test-for-petek" -ls
+          echo === END
+          echo === ls /data/work
+          ls -l /data/work
+          echo === END
       - uses: actions/checkout@v2
         with:
           fetch-depth: "0"
