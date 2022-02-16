@@ -10,15 +10,11 @@ jobs:
     name: Semgrep
     runs-on: [ self-hosted, weave-stable ]
     steps:
-      - name: Checkout Actions Repo
-        uses: actions/checkout@v2
-        with:
-          repository: weave-lab/actions
-          token: ${{secrets.GITHUBACTIONSTOKEN}}
-          path: actions
-          persist-credentials: false
       - name: Cleanup
-        uses: ./actions/cleanup/
+        uses: docker://gcr.io/weave-lab/devx/github-actions-cleanup:1.0.202202170435-sha.14049aad-pk-cleanup-image
+        with:
+          entrypoint: /bin/find
+          args: . -not -path ./actions -not -path ./actions/* -delete
       - name: env
         run: |
           echo === WHOAMI
@@ -33,9 +29,10 @@ jobs:
           echo === ls /data/work
           ls -l /data/work/
           echo === END
+          echo === find /data/work/lessonly-test-for-petek
+          find /data/work/lessonly-test-for-petek
+          echo === END
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: "0"
       - uses: returntocorp/semgrep-action@v1
         with:
           publishToken: ${{ secrets.SCAN_TOKEN }}
