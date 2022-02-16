@@ -10,7 +10,15 @@ jobs:
     name: Semgrep
     runs-on: [ self-hosted, weave-stable ]
     steps:
-      - uses: ./.github/actions/cleanup
+      - name: Checkout Actions Repo
+        uses: actions/checkout@v2
+        with:
+          repository: weave-lab/actions
+          token: ${{secrets.GITHUBACTIONSTOKEN}}
+          path: actions
+          persist-credentials: false
+      - name: Cleanup
+        uses: ./actions/cleanup/
       - uses: actions/checkout@v2
         with:
           fetch-depth: "0"
