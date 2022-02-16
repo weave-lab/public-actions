@@ -19,6 +19,20 @@ jobs:
           persist-credentials: false
       - name: Cleanup
         uses: ./actions/cleanup/
+      - name: env
+        run: |
+          echo === WHOAMI
+          whoami
+          echo === END
+          echo === PWD
+          pwd
+          echo === END
+          echo === FIND /data/work/lessonly-test-for-petek/lessonly-test-for-petek/
+          find "/data/work/lessonly-test-for-petek/" -ls
+          echo === END
+          echo === ls /data/work
+          ls -l /data/work/
+          echo === END
       - uses: actions/checkout@v2
         with:
           fetch-depth: "0"
