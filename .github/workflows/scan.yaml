@@ -9,7 +9,6 @@ jobs:
   semgrep:
     name: Semgrep
     runs-on: [ self-hosted, weave-stable ]
-    if: ${{ github.actor != 'dependabot[bot]' && (github.event_name == 'pull_request' || contains(fromJson('["refs/heads/master","refs/heads/main"]'), github.ref)) }}
     steps:
       - name: debug
         run: |
