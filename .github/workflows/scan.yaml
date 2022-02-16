@@ -10,20 +10,7 @@ jobs:
     name: Semgrep
     runs-on: [ self-hosted, weave-stable ]
     steps:
-      - name: debug
-        run: |
-          echo === PWD
-          pwd
-          echo === END
-          echo === host
-          hostname
-          echo === END
-          echo === ls -l "/data/work/lessonly-test-for-petek/lessonly-test-for-petek"
-          find "/data/work/lessonly-test-for-petek" -ls
-          echo === END
-          echo === ls /data/work
-          ls -l /data/work
-          echo === END
+      - uses: ./.github/actions/cleanup
       - uses: actions/checkout@v2
         with:
           fetch-depth: "0"
