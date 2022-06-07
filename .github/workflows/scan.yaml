@@ -5,6 +5,10 @@ on:
         required: true
       GITHUBACTIONSTOKEN:
         required: true
+    git:
+      submodules:
+        default: false
+
 jobs:
   semgrep:
     name: Semgrep
@@ -16,6 +20,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: "0"
+          submodules: ${{ git.submodules }}
       - uses: returntocorp/semgrep-action@v1
         with:
           publishToken: ${{ secrets.SCAN_TOKEN }}
