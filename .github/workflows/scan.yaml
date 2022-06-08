@@ -7,6 +7,9 @@ on:
         required: true
     inputs:
       submodules:
+        description: 'Enable submodule (recursive) checkout by actions/checkout'
+        # Allowed values are "" or "false" (default), "true" and "recursive" - see https://github.com/actions/checkout/blob/main/README.md#usage
+        type: string
         required: false
 
 jobs:
