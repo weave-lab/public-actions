@@ -5,9 +5,9 @@ on:
         required: true
       GITHUBACTIONSTOKEN:
         required: true
-    git:
+    inputs:
       submodules:
-        default: false
+        required: false
 
 jobs:
   semgrep:
